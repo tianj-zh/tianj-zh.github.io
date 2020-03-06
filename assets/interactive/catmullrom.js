@@ -256,6 +256,11 @@
         catmullrom_gui.add(curve, 'clear').name("Clear");
 
         catmullrom_app.renderer.plugins.interaction.on('pointerdown', (event) => {
+            if (pointer_down === true) {
+                curve.clear();
+                pointer_down = false;
+            }
+            
             const pos = event.data.global;
             const obj = catmullrom_app.renderer.plugins.interaction.hitTest(pos);
             if (obj === null) {
@@ -273,10 +278,7 @@
 
         catmullrom_app.renderer.plugins.interaction.on('pointerup', (event) => {
             const pos = event.data.global;
-            if (pointer_down === true) {
-                curve.addPoint(pos.x, pos.y);
-                pointer_down = false;
-            }
+            curve.addPoint(pos.x, pos.y);
         });
     });
 })();
