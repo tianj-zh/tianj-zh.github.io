@@ -237,11 +237,9 @@
         }
 
         addPoint(x, y) {
-            if (this._points.length < 100) {
-                const point = new Point(x, y, this.update.bind(this));
-                this._points.push(point);
-                this.update();
-            }
+            const point = new Point(x, y, this.update.bind(this));
+            this._points.push(point);
+            this.update();
         }
     };
 
