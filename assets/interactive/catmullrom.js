@@ -4,9 +4,9 @@
             this._onUpdate = update;
             this._graphics = new PIXI.Graphics();
             this._graphics.interactive = true;
-            this._graphics.beginFill(brandColor);
-            this._graphics.drawCircle(0, 0, 10);
-            this._graphics.endFill();
+            // this._graphics.beginFill(brandColor);
+            // this._graphics.drawCircle(0, 0, 10);
+            // this._graphics.endFill();
             this._graphics.x = x;
             this._graphics.y = y;
             this._graphics
@@ -129,7 +129,7 @@
             }
 
             if (this._drawLines) {
-                this._graphics.lineStyle(2, greyColorLight);
+                this._graphics.lineStyle(1, greyColorLight);
                 this._graphics.moveTo(this._points[0].x, this._points[0].y);
 
                 for (let i = 1; i < numPoints; i++) {
@@ -158,7 +158,7 @@
                 ps.push(last);
             }
 
-            this._graphics.lineStyle(3, greyColorDark);
+            this._graphics.lineStyle(1, greyColorDark);
             this._graphics.moveTo(ps[1].x, ps[1].y);
 
             for (let i = 1; i < ps.length - 2; i++) {
@@ -260,7 +260,7 @@
                 curve.clear();
                 pointer_down = false;
             }
-            
+
             const pos = event.data.global;
             const obj = catmullrom_app.renderer.plugins.interaction.hitTest(pos);
             if (obj === null) {
