@@ -249,6 +249,7 @@
         catmullrom_initialize();
 
         const curve = new Curve();
+        var pointer_down = false;
 
         catmullrom_gui.add(curve, 'alpha', { 'Uniform' : 0, 'Centripetal' : 0.5, 'Chordal' : 1 }).name("Type");
         catmullrom_gui.add(curve, 'tension').min(0).max(1).step(0.01).name("Tension");
@@ -260,7 +261,23 @@
             const pos = event.data.global;
             const obj = catmullrom_app.renderer.plugins.interaction.hitTest(pos);
             if (obj === null) {
+                pointer_down = true;
                 curve.addPoint(pos.x, pos.y);
+            }
+        });
+
+        catmullrom_app.renderer.plugins.interaction.on('pointermove', (event) => {
+            const pos = event.data.global;
+            if (pointer_down === true) {
+                curve.addPoint(pos.x, pos.y);
+            }
+        });
+
+        catmullrom_app.renderer.plugins.interaction.on('pointerup', (event) => {
+            const pos = event.data.global;
+            if (pointer_down === true) {
+                curve.addPoint(pos.x, pos.y);
+                pointer_down = false;
             }
         });
     });
